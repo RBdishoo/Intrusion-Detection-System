@@ -2,7 +2,7 @@
 <a href ="https://www.linkedin.com/in/ruben-betabdishoo/"><img src="https://img.shields.io/badge/-LinkedIn-0072b1?&style=for-the-badge&logo=linkedin&logoColor=white" /></a>
 
 
-[Brief Introduction]
+
 
 I am currently studying computer science at Arizona State University and have a growing passion for cybersecurity and AI. 
 
