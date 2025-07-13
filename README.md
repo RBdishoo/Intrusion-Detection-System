@@ -15,7 +15,7 @@ The exponential rise of AI has transformed cybersecurity into a dynamic frontier
 
 | Skill                                         | Associated Project         |
 |-----------------------------------------------|----------------------------|
-| Intrusion Detection System with AI integration          | <a href="https://google.com">Project</a>|
+| Intrusion Detection System with AI integration          | <a href="https://github.com/RBdishoo/Intrusion-Detection-System">Project</a>|
 
 
 
