@@ -1,16 +1,30 @@
-## Hi there 👋
+## Project 1: Intrusion Detection System using an AI integrated anomoly detector
 
-<!--
-**RBdishoo/RBdishoo** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+About -
 
-Here are some ideas to get you started:
+This project implements a Python-based Intrusion Detection System (IDS) module leveraging machine learning algorithms to analyze network traffic data and identify anomalous behavior indicative of cyber threats.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+Features -
+
+Performance - 
+
+Structure - 
+
+How to Run - 
+
+    before running:
+
+    Setup:
+
+    Execution:
+
+Results and Analysis -
+
+
+Future changes -
+
+
+
+
+    
+
