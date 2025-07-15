@@ -1,12 +1,12 @@
 import pandas as pd
 import numpy as np
 import os
-from sklearn.preprocessing import StandardScaler # NEW: Import StandardScaler
+from sklearn.preprocessing import StandardScaler 
 
-# --- Configuration ---
+#Config
 data_file_path = 'Monday-WorkingHours.pcap_ISCX.csv'
 
-# --- Load the data ---
+#Load data
 print(f"\nAttempting to load data from: {data_file_path}")
 try:
     df = pd.read_csv(data_file_path)
@@ -19,17 +19,13 @@ except Exception as e:
     print(f"An error occurred during loading: {e}")
     exit()
 
-# --- Data Cleaning Steps ---
-
-# 1. Clean Column Names: Remove leading/trailing spaces
+#Data Cleaning
 print("\n--- Cleaning Column Names ---")
-# df.columns.tolist() before stripping to show original names
 original_columns_for_display = df.columns.tolist()
 df.columns = df.columns.str.strip()
 print("Original Columns (first 5):", original_columns_for_display[:5], "...")
 print("Cleaned Columns (first 5):", df.columns.tolist()[:5], "...")
 
-# 2. Handle Infinite Values (Inf) and NaN values
 print("\n--- Handling Infinite and NaN values ---")
 df.replace([np.inf, -np.inf], np.nan, inplace=True)
 initial_nan_count = df.isnull().sum().sum()
@@ -39,19 +35,14 @@ print("NaN values filled with 0.")
 final_nan_count = df.isnull().sum().sum()
 print(f"Final NaN count: {final_nan_count}")
 
-
-# --- NEW: Feature Engineering and Selection ---
+#Feature Engineering and Selection
 
 print("\n--- Feature Engineering and Selection ---")
 
 # Identify the Label column (after cleaning names)
-label_column = 'Label' # Now we can assume it's simply 'Label' after stripping spaces
+label_column = 'Label' 
 
 # Identify columns to drop
-# 'Fwd Header Length.1' is a duplicate of 'Fwd Header Length' in some CIC-IDS2017 datasets.
-# 'Flow ID', 'Source IP', 'Destination IP', 'Timestamp' are typically dropped for ML models
-# that learn numerical patterns, as they are identifiers/timestamps, not behavioral features.
-# You might keep them for forensic analysis, but not for training the anomaly detection core.
 columns_to_drop = [
     'Fwd Header Length.1', # Known duplicate
     'Flow ID',             # Unique identifier, not a feature
@@ -69,8 +60,7 @@ else:
     print("No specified columns to drop were found in the DataFrame (they might have been handled already or are not in this specific file).")
 
 
-# Identify constant columns (columns with only one unique value)
-# These provide no information to a machine learning model.
+# Identify constant columns: these provide no information to a machine learning model.
 constant_columns = [col for col in df.columns if df[col].nunique() == 1 and col != label_column]
 if constant_columns:
     print(f"Dropping constant columns: {constant_columns}")
@@ -79,17 +69,15 @@ else:
     print("No constant columns found (excluding the Label column).")
 
 
-# Separate features (X) and target (y)
-# For unsupervised learning, X will be all numerical features.
-# y will be the Label column, which we'll use for evaluation later.
+# Separate features (X) and target (y). For unsupervised learning, X will be all numerical features. Y will be the Label column
 X = df.drop(columns=[label_column])
 y = df[label_column]
 print(f"Features (X) shape: {X.shape}")
 print(f"Target (y) shape: {y.shape}")
 
 
-# Feature Scaling (Standardization)
-# Scale numerical features. This is important for distance-based algorithms.
+# Feature Scaling, Standardization
+# Scale numerical features.
 print("\n--- Scaling Features ---")
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
@@ -99,17 +87,13 @@ print("First 5 rows of scaled features:")
 print(X_scaled_df.head())
 
 
-# --- Initial Data Exploration (Keep these for re-verification) ---
+#Initial Data Exploration
 print("\n--- DataFrame Information After Cleaning & Feature Selection ---")
 # Use the X_scaled_df for info, as this is our final feature set
 X_scaled_df.info()
 
 print("\n--- First 5 Rows After Cleaning & Feature Selection ---")
 print(X_scaled_df.head())
-
-# We don't need describe() on scaled data as much, but you can keep if curious.
-# print("\n--- Basic Statistics After Cleaning & Feature Selection ---")
-# print(X_scaled_df.describe())
 
 print("\n--- Column Names After Cleaning & Feature Selection ---")
 print(X_scaled_df.columns.tolist())
