@@ -1,9 +1,9 @@
 # Python virtual environment
 ids_project_env/
 
-# Large data files (CSV, PCAP) - we'll handle these separately if needed
+# Large data files (CSV, PCAP)
 *.csv
-*.pcap_ISCX.csv # Specific for your dataset
+*.pcap_ISCX.csv 
 
 # Trained models
 *.joblib
@@ -11,5 +11,5 @@ ids_project_env/
 
 # IDE and OS specific files
 .DS_Store
-.vscode/ # If you use VS Code
+.vscode/ 
 __pycache__/
